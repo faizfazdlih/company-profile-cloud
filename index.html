@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nexora — Solusi Digital Modern</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafaf9;
+      --surface: #ffffff;
+      --border: #e8e5e0;
+      --border-light: #f0ece7;
+      --text-primary: #18181b;
+      --text-secondary: #71717a;
+      --text-muted: #a1a1aa;
+      --accent: #18181b;
+      --accent-fg: #ffffff;
+      --green: #16a34a;
+      --green-bg: #f0fdf4;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow: 0 4px 16px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-lg: 0 16px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,250,249,0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1160px; margin: 0 auto;
+      padding: 0 24px;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: var(--green); }
+    .nav-links {
+      display: flex; align-items: center; gap: 4px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      transition: color .15s, background .15s;
+    }
+    .nav-links a:hover { color: var(--text-primary); background: var(--border-light); }
+    .nav-cta {
+      background: var(--accent); color: var(--accent-fg) !important;
+      border-radius: var(--radius-sm);
+      font-weight: 600 !important;
+      padding: 8px 18px !important;
+      transition: opacity .15s !important;
+    }
+    .nav-cta:hover { opacity: .85; background: transparent !important; }
+    .hamburger { display: none; cursor: pointer; }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--text-primary); margin: 5px 0;
+      border-radius: 4px; transition: .3s;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1160px; margin: 0 auto;
+      padding: 96px 24px 80px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green-bg);
+      border: 1px solid #bbf7d0;
+      color: var(--green);
+      font-size: 12px; font-weight: 600;
+      padding: 4px 12px; border-radius: 100px;
+      margin-bottom: 24px;
+      letter-spacing: .02em;
+    }
+    .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:.5; transform:scale(1.4); }
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: italic; color: var(--text-secondary); }
+    .hero p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 440px;
+      margin-bottom: 36px;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: var(--accent-fg);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px; font-weight: 600;
+      padding: 12px 24px; border-radius: var(--radius-sm);
+      border: 1px solid var(--accent);
+      cursor: pointer; text-decoration: none;
+      transition: opacity .15s;
+    }
+    .btn-primary:hover { opacity: .85; }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--surface); color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px; font-weight: 500;
+      padding: 12px 24px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      cursor: pointer; text-decoration: none;
+      transition: background .15s, border-color .15s;
+    }
+    .btn-secondary:hover { background: var(--border-light); border-color: #d0cdc8; }
+    .hero-visual {
+      position: relative;
+    }
+    .dashboard-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
+      animation: float 5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .dash-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .dash-title { font-size: 13px; font-weight: 600; }
+    .dash-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .dash-badge {
+      font-size: 11px; font-weight: 600; color: var(--green);
+      background: var(--green-bg); border: 1px solid #bbf7d0;
+      padding: 2px 8px; border-radius: 100px;
+    }
+    .chart-bars {
+      display: flex; align-items: flex-end; gap: 8px; height: 80px;
+      margin-bottom: 20px;
+    }
+    .bar {
+      flex: 1; border-radius: 4px 4px 0 0;
+      background: var(--border-light);
+      transition: background .2s;
+      position: relative;
+    }
+    .bar.active { background: var(--accent); }
+    .bar.accent2 { background: #d4d4d8; }
+    .bar:hover { opacity: .8; }
+    .stats-row {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px; border-top: 1px solid var(--border-light); padding-top: 16px;
+    }
+    .stat-item { text-align: center; }
+    .stat-val { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+    .stat-lbl { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; margin-top: 2px; }
+    .floating-pill {
+      position: absolute; top: -16px; right: -16px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 100px; padding: 8px 16px;
+      box-shadow: var(--shadow);
+      font-size: 12px; font-weight: 600;
+      display: flex; align-items: center; gap: 6px;
+      animation: float 4s ease-in-out infinite .5s;
+    }
+    .pill-icon { font-size: 16px; }
+    .floating-pill2 {
+      position: absolute; bottom: -12px; left: -16px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 10px 14px;
+      box-shadow: var(--shadow);
+      font-size: 12px; font-weight: 500;
+      display: flex; align-items: center; gap: 8px;
+      animation: float 6s ease-in-out infinite 1s;
+    }
+    .avatar-stack { display: flex; }
+    .avatar {
+      width: 24px; height: 24px; border-radius: 50%;
+      border: 2px solid var(--surface);
+      margin-left: -6px; font-size: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; color: white;
+    }
+    .av1 { background: #6366f1; margin-left: 0; }
+    .av2 { background: #f59e0b; }
+    .av3 { background: #ec4899; }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      max-width: 1160px; margin: 0 auto;
+      padding: 0 24px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    /* ── LOGOS ── */
+    .logos-section {
+      padding: 48px 24px;
+      text-align: center;
+    }
+    .logos-inner { max-width: 1160px; margin: 0 auto; }
+    .logos-label {
+      font-size: 12px; font-weight: 600; color: var(--text-muted);
+      letter-spacing: .08em; text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .logos-grid {
+      display: flex; align-items: center; justify-content: center;
+      gap: 40px; flex-wrap: wrap;
+    }
+    .logo-item {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px; color: var(--text-muted);
+      letter-spacing: -0.02em;
+      opacity: .6; transition: opacity .2s;
+    }
+    .logo-item:hover { opacity: 1; }
+
+    /* ── SECTION HEADER ── */
+    .section {
+      max-width: 1160px; margin: 0 auto;
+      padding: 80px 24px;
+    }
+    .section-tag {
+      display: inline-block;
+      font-size: 12px; font-weight: 600; color: var(--text-secondary);
+      letter-spacing: .08em; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      font-size: 16px; color: var(--text-secondary);
+      max-width: 520px; line-height: 1.7;
+    }
+
+    /* ── FEATURES ── */
+    .features-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; margin-top: 48px;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: box-shadow .2s, border-color .2s, transform .2s;
+    }
+    .feature-card:hover {
+      box-shadow: var(--shadow);
+      border-color: #d0cdc8;
+      transform: translateY(-2px);
+    }
+    .feature-icon {
+      width: 44px; height: 44px; border-radius: var(--radius-sm);
+      background: var(--bg); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 16px;
+    }
+    .feature-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+    .feature-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+    /* ── HOW IT WORKS ── */
+    .how-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .how-inner {
+      max-width: 1160px; margin: 0 auto;
+      padding: 80px 24px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .steps { margin-top: 40px; display: flex; flex-direction: column; gap: 0; }
+    .step {
+      display: flex; gap: 20px; padding: 20px 0;
+      border-bottom: 1px solid var(--border-light);
+      cursor: default;
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      width: 36px; height: 36px; min-width: 36px;
+      border-radius: 50%; border: 1px solid var(--border);
+      background: var(--bg);
+      font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-secondary);
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .step:hover .step-num { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+    .step-body {}
+    .step-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .step-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+    .how-visual {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 16px; padding: 32px;
+      box-shadow: var(--shadow);
+    }
+    .code-window {
+      background: #18181b; border-radius: 10px; overflow: hidden;
+    }
+    .code-bar {
+      display: flex; align-items: center; gap: 6px;
+      padding: 10px 14px; background: #27272a;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #ef4444; }
+    .dot-y { background: #f59e0b; }
+    .dot-g { background: #22c55e; }
+    .code-body { padding: 20px; font-family: 'DM Mono', 'Courier New', monospace; font-size: 13px; line-height: 1.8; }
+    .c-green { color: #4ade80; }
+    .c-blue { color: #60a5fa; }
+    .c-yellow { color: #fbbf24; }
+    .c-gray { color: #6b7280; }
+    .c-white { color: #f4f4f5; }
+    .c-orange { color: #fb923c; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; margin-top: 48px;
+    }
+    .testimonial-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: box-shadow .2s;
+    }
+    .testimonial-card:hover { box-shadow: var(--shadow); }
+    .stars { color: #f59e0b; font-size: 14px; margin-bottom: 16px; letter-spacing: 2px; }
+    .testimonial-text {
+      font-size: 14px; color: var(--text-primary);
+      line-height: 1.7; margin-bottom: 20px;
+      font-style: italic;
+    }
+    .author { display: flex; align-items: center; gap: 12px; }
+    .author-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: white;
+    }
+    .author-name { font-size: 13px; font-weight: 600; }
+    .author-role { font-size: 12px; color: var(--text-muted); }
+
+    /* ── PRICING ── */
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; margin-top: 48px; align-items: start;
+    }
+    .pricing-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: box-shadow .2s;
+    }
+    .pricing-card:hover { box-shadow: var(--shadow); }
+    .pricing-card.featured {
+      background: var(--accent); color: var(--accent-fg);
+      border-color: var(--accent);
+      box-shadow: var(--shadow-lg);
+    }
+    .plan-label {
+      font-size: 12px; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .pricing-card.featured .plan-label { color: rgba(255,255,255,.6); }
+    .plan-price {
+      font-family: 'DM Serif Display', serif;
+      font-size: 42px; letter-spacing: -0.04em;
+      margin-bottom: 4px;
+    }
+    .plan-period { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+    .pricing-card.featured .plan-period { color: rgba(255,255,255,.6); }
+    .plan-desc { font-size: 13px; color: var(--text-secondary); margin-bottom: 24px; line-height: 1.6; }
+    .pricing-card.featured .plan-desc { color: rgba(255,255,255,.75); }
+    .plan-divider { border: none; border-top: 1px solid var(--border-light); margin: 20px 0; }
+    .pricing-card.featured .plan-divider { border-color: rgba(255,255,255,.15); }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .plan-features li {
+      font-size: 13px; display: flex; align-items: center; gap: 10px;
+    }
+    .plan-features li::before { content: '✓'; font-weight: 700; color: var(--green); font-size: 13px; }
+    .pricing-card.featured .plan-features li::before { color: #4ade80; }
+    .plan-features li.dim { color: var(--text-muted); }
+    .plan-features li.dim::before { content: '–'; color: var(--text-muted); }
+    .btn-plan {
+      width: 100%; padding: 11px; border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600;
+      cursor: pointer; border: 1px solid var(--border);
+      background: var(--bg); color: var(--text-primary);
+      transition: background .15s, border-color .15s;
+    }
+    .btn-plan:hover { background: var(--border-light); }
+    .pricing-card.featured .btn-plan {
+      background: white; color: var(--accent); border-color: white;
+    }
+    .pricing-card.featured .btn-plan:hover { background: rgba(255,255,255,.9); }
+
+    /* ── STATS ── */
+    .stats-section {
+      background: var(--accent);
+      color: var(--accent-fg);
+    }
+    .stats-inner {
+      max-width: 1160px; margin: 0 auto;
+      padding: 72px 24px;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 48px; text-align: center;
+    }
+    .big-stat-val {
+      font-family: 'DM Serif Display', serif;
+      font-size: 48px; letter-spacing: -0.04em;
+      margin-bottom: 6px;
+    }
+    .big-stat-lbl { font-size: 14px; color: rgba(255,255,255,.65); }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 96px 24px;
+      text-align: center;
+      background: var(--bg);
+    }
+    .cta-inner { max-width: 640px; margin: 0 auto; }
+    .cta-inner .section-title { margin: 0 auto 16px; }
+    .cta-inner .section-desc { margin: 0 auto 36px; text-align: center; max-width: 100%; }
+    .cta-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      max-width: 1160px; margin: 0 auto;
+      padding: 56px 24px 32px;
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; margin-bottom: 48px;
+    }
+    .footer-brand .logo { font-size: 20px; display: block; margin-bottom: 12px; }
+    .footer-brand p { font-size: 13px; color: var(--text-secondary); line-height: 1.7; max-width: 240px; }
+    .footer-col h4 {
+      font-size: 12px; font-weight: 700; color: var(--text-primary);
+      letter-spacing: .06em; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col a {
+      font-size: 13px; color: var(--text-secondary); text-decoration: none;
+      transition: color .15s;
+    }
+    .footer-col a:hover { color: var(--text-primary); }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 28px; border-top: 1px solid var(--border-light);
+      font-size: 12px; color: var(--text-muted);
+    }
+    .social-links { display: flex; gap: 16px; }
+    .social-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color .15s; }
+    .social-links a:hover { color: var(--text-primary); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 48px; padding: 64px 24px 48px; }
+      .hero-visual { display: none; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .how-inner { grid-template-columns: 1fr; gap: 40px; }
+      .how-visual { display: none; }
+      .stats-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-brand { grid-column: 1/-1; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .features-grid { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">Nexora<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#features">Fitur</a></li>
+      <li><a href="#how">Cara Kerja</a></li>
+      <li><a href="#pricing">Harga</a></li>
+      <li><a href="#testimonials">Testimoni</a></li>
+      <li><a href="#contact" class="nav-cta">Mulai Gratis</a></li>
+    </ul>
+    <div class="hamburger" onclick="this.classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section>
+  <div class="hero">
+    <div class="hero-content fade-in">
+      <div class="badge"><span class="badge-dot"></span> Baru: Integrasi AI v2.0 sudah tersedia</div>
+      <h1>Platform digital untuk bisnis yang <em>lebih cerdas</em></h1>
+      <p>Nexora membantu tim Anda bekerja lebih efisien dengan alat analitik, otomasi, dan kolaborasi yang dirancang untuk era modern.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Coba Gratis 14 Hari →</a>
+        <a href="#how" class="btn-secondary">▶ Lihat Demo</a>
+      </div>
+    </div>
+
+    <div class="hero-visual fade-in">
+      <div class="floating-pill"><span class="pill-icon">📈</span> Revenue naik 42%</div>
+      <div class="dashboard-card">
+        <div class="dash-header">
+          <div>
+            <div class="dash-title">Performa Bisnis</div>
+            <div class="dash-sub">Periode: Jan – Jun 2025</div>
+          </div>
+          <div class="dash-badge">+18.4%</div>
+        </div>
+        <div class="chart-bars">
+          <div class="bar" style="height:40%"></div>
+          <div class="bar accent2" style="height:55%"></div>
+          <div class="bar" style="height:48%"></div>
+          <div class="bar accent2" style="height:70%"></div>
+          <div class="bar" style="height:62%"></div>
+          <div class="bar active" style="height:88%"></div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-val">12.4K</div>
+            <div class="stat-lbl">Pengguna</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">Rp 2.1M</div>
+            <div class="stat-lbl">Revenue</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">98.7%</div>
+            <div class="stat-lbl">Uptime</div>
+          </div>
+        </div>
+      </div>
+      <div class="floating-pill2">
+        <div class="avatar-stack">
+          <div class="avatar av1">A</div>
+          <div class="avatar av2">B</div>
+          <div class="avatar av3">C</div>
+        </div>
+        <span>3 anggota bergabung hari ini</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<div class="section-divider"></div>
+<section class="logos-section">
+  <div class="logos-inner fade-in">
+    <p class="logos-label">Dipercaya oleh 500+ perusahaan Indonesia</p>
+    <div class="logos-grid">
+      <div class="logo-item">Tokopedia</div>
+      <div class="logo-item">Gojek</div>
+      <div class="logo-item">Traveloka</div>
+      <div class="logo-item">Bukalapak</div>
+      <div class="logo-item">Tiket.com</div>
+      <div class="logo-item">Shopee</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div class="section-divider"></div>
+<section class="section" id="features">
+  <div class="fade-in">
+    <div class="section-tag">✦ Fitur Unggulan</div>
+    <h2 class="section-title">Semua yang Anda butuhkan,<br>dalam satu platform</h2>
+    <p class="section-desc">Dari analitik real-time hingga otomasi canggih — Nexora hadir lengkap agar tim Anda fokus pada hal yang benar-benar penting.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card fade-in">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">Analitik Real-Time</div>
+      <p class="feature-desc">Pantau performa bisnis Anda secara langsung dengan dashboard yang bisa dikustomisasi sepenuhnya.</p>
+    </div>
+    <div class="feature-card fade-in">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-title">Otomasi Cerdas</div>
+      <p class="feature-desc">Buat alur kerja otomatis tanpa perlu kode. Hubungkan ratusan aplikasi dengan mudah.</p>
+    </div>
+    <div class="feature-card fade-in">
+      <div class="feature-icon">🤝</div>
+      <div class="feature-title">Kolaborasi Tim</div>
+      <p class="feature-desc">Undang anggota tim, atur izin akses, dan kerjakan proyek bersama dalam satu workspace.</p>
+    </div>
+    <div class="feature-card fade-in">
+      <div class="feature-icon">🔒</div>
+      <div class="feature-title">Keamanan Enterprise</div>
+      <p class="feature-desc">Enkripsi end-to-end, SSO, dan audit log lengkap memastikan data Anda selalu aman.</p>
+    </div>
+    <div class="feature-card fade-in">
+      <div class="feature-icon">🌐</div>
+      <div class="feature-title">Integrasi API</div>
+      <p class="feature-desc">Hubungkan Nexora dengan sistem yang sudah ada. REST API dan webhook tersedia lengkap.</p>
+    </div>
+    <div class="feature-card fade-in">
+      <div class="feature-icon">🧠</div>
+      <div class="feature-title">AI Insights</div>
+      <p class="feature-desc">Dapatkan rekomendasi berbasis AI untuk keputusan bisnis yang lebih tepat dan akurat.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="how-inner">
+    <div class="fade-in">
+      <div class="section-tag">✦ Cara Kerja</div>
+      <h2 class="section-title">Mulai dalam hitungan menit</h2>
+      <p class="section-desc">Tidak perlu instalasi rumit atau tim IT. Nexora dirancang agar siapa saja bisa langsung produktif.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Buat akun gratis</div>
+            <p class="step-desc">Daftar dengan email atau akun Google Anda. Tidak perlu kartu kredit untuk memulai.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Hubungkan data Anda</div>
+            <p class="step-desc">Impor data dari spreadsheet, CRM, atau integrasikan langsung via API dalam beberapa klik.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Undang tim Anda</div>
+            <p class="step-desc">Tambahkan anggota tim dan atur peran masing-masing sesuai kebutuhan bisnis Anda.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">Pantau & optimalkan</div>
+            <p class="step-desc">Lihat insight real-time dan biarkan AI membantu Anda menemukan peluang pertumbuhan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="how-visual fade-in">
+      <div class="code-window">
+        <div class="code-bar">
+          <div class="dot dot-r"></div>
+          <div class="dot dot-y"></div>
+          <div class="dot dot-g"></div>
+        </div>
+        <div class="code-body">
+          <div><span class="c-green">// Nexora API Example</span></div>
+          <div><span class="c-blue">const</span> <span class="c-white">nexora</span> = <span class="c-yellow">require</span>(<span class="c-orange">'nexora-sdk'</span>);</div>
+          <div>&nbsp;</div>
+          <div><span class="c-blue">const</span> <span class="c-white">client</span> = <span class="c-blue">new</span> nexora.<span class="c-yellow">Client</span>({</div>
+          <div>&nbsp;&nbsp;<span class="c-white">apiKey</span>: <span class="c-orange">'your_api_key'</span>,</div>
+          <div>&nbsp;&nbsp;<span class="c-white">workspace</span>: <span class="c-orange">'my-company'</span></div>
+          <div>});</div>
+          <div>&nbsp;</div>
+          <div><span class="c-green">// Ambil data analitik</span></div>
+          <div><span class="c-blue">const</span> <span class="c-white">insights</span> = <span class="c-blue">await</span></div>
+          <div>&nbsp;&nbsp;client.<span class="c-yellow">analytics</span>.<span class="c-yellow">get</span>({</div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-white">period</span>: <span class="c-orange">'last_30_days'</span>,</div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-white">metrics</span>: [<span class="c-orange">'revenue'</span>, <span class="c-orange">'users'</span>]</div>
+          <div>&nbsp;&nbsp;});</div>
+          <div>&nbsp;</div>
+          <div><span class="c-gray">// ✓ { revenue: 2100000, users: 12400 }</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="stats-inner">
+    <div class="fade-in">
+      <div class="big-stat-val">500+</div>
+      <div class="big-stat-lbl">Perusahaan aktif</div>
+    </div>
+    <div class="fade-in">
+      <div class="big-stat-val">12M+</div>
+      <div class="big-stat-lbl">Transaksi diproses</div>
+    </div>
+    <div class="fade-in">
+      <div class="big-stat-val">99.9%</div>
+      <div class="big-stat-lbl">Uptime SLA</div>
+    </div>
+    <div class="fade-in">
+      <div class="big-stat-val">4.9★</div>
+      <div class="big-stat-lbl">Rating pengguna</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials">
+  <div class="fade-in">
+    <div class="section-tag">✦ Testimoni</div>
+    <h2 class="section-title">Kata mereka yang sudah<br>menggunakan Nexora</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Nexora mengubah cara kami melihat data bisnis. Dashboard-nya intuitif dan insight AI-nya benar-benar membantu keputusan strategis kami."</p>
+      <div class="author">
+        <div class="author-avatar" style="background:#6366f1">RA</div>
+        <div>
+          <div class="author-name">Rizky Aditya</div>
+          <div class="author-role">CEO, TechStart Indonesia</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Onboarding-nya super mudah. Tim kami yang 20 orang bisa langsung produktif di hari pertama tanpa training yang panjang."</p>
+      <div class="author">
+        <div class="author-avatar" style="background:#f59e0b">SM</div>
+        <div>
+          <div class="author-name">Sari Maharani</div>
+          <div class="author-role">Head of Ops, Warunk Digital</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"ROI kami naik 35% dalam 3 bulan pertama. Support mereka juga responsif dan selalu siap membantu kapanpun kami butuh."</p>
+      <div class="author">
+        <div class="author-avatar" style="background:#ec4899">BP</div>
+        <div>
+          <div class="author-name">Budi Pratama</div>
+          <div class="author-role">COO, Nusantara Commerce</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<div class="section-divider"></div>
+<section class="section" id="pricing">
+  <div class="fade-in" style="text-align:center">
+    <div class="section-tag">✦ Harga</div>
+    <h2 class="section-title">Transparan, tanpa biaya tersembunyi</h2>
+    <p class="section-desc" style="margin:0 auto">Pilih paket yang sesuai dengan ukuran dan kebutuhan bisnis Anda.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card fade-in">
+      <div class="plan-label">Starter</div>
+      <div class="plan-price">Gratis</div>
+      <div class="plan-period">Selamanya</div>
+      <p class="plan-desc">Cocok untuk individu dan tim kecil yang baru memulai.</p>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>5 pengguna</li>
+        <li>3 workspace</li>
+        <li>Analitik dasar</li>
+        <li>5 GB penyimpanan</li>
+        <li class="dim">Akses API</li>
+        <li class="dim">AI Insights</li>
+      </ul>
+      <button class="btn-plan">Mulai Gratis</button>
+    </div>
+    <div class="pricing-card featured fade-in">
+      <div class="plan-label">Pro</div>
+      <div class="plan-price">Rp 299K</div>
+      <div class="plan-period">per pengguna / bulan</div>
+      <p class="plan-desc">Untuk tim profesional yang butuh fitur lengkap dan kolaborasi tanpa batas.</p>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>Pengguna tak terbatas</li>
+        <li>Workspace tak terbatas</li>
+        <li>Analitik lanjutan</li>
+        <li>50 GB penyimpanan</li>
+        <li>Akses API penuh</li>
+        <li>AI Insights</li>
+      </ul>
+      <button class="btn-plan">Coba 14 Hari Gratis</button>
+    </div>
+    <div class="pricing-card fade-in">
+      <div class="plan-label">Enterprise</div>
+      <div class="plan-price">Custom</div>
+      <div class="plan-period">Hubungi kami</div>
+      <p class="plan-desc">Solusi khusus untuk perusahaan besar dengan kebutuhan keamanan dan skalabilitas tinggi.</p>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>Semua fitur Pro</li>
+        <li>SSO & SAML</li>
+        <li>SLA 99.99%</li>
+        <li>Penyimpanan tak terbatas</li>
+        <li>Dedicated support</li>
+        <li>On-premise option</li>
+      </ul>
+      <button class="btn-plan">Hubungi Sales</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner fade-in">
+    <div class="section-tag">✦ Mulai Sekarang</div>
+    <h2 class="section-title">Siap membawa bisnis Anda ke level berikutnya?</h2>
+    <p class="section-desc">Bergabunglah dengan 500+ perusahaan yang sudah mempercayakan operasional bisnis mereka kepada Nexora.</p>
+    <div class="cta-actions">
+      <a href="#" class="btn-primary">Mulai Gratis 14 Hari →</a>
+      <a href="#" class="btn-secondary">Jadwalkan Demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo">Nexora<span style="color:var(--green)">.</span></a>
+        <p>Platform digital modern yang membantu bisnis Indonesia tumbuh lebih cerdas dan efisien.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Produk</h4>
+        <ul>
+          <li><a href="#">Fitur</a></li>
+          <li><a href="#">Harga</a></li>
+          <li><a href="#">Integrasi</a></li>
+          <li><a href="#">Changelog</a></li>
+          <li><a href="#">Status</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Perusahaan</h4>
+        <ul>
+          <li><a href="#">Tentang Kami</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Karir</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Kontak</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Bantuan</h4>
+        <ul>
+          <li><a href="#">Dokumentasi</a></li>
+          <li><a href="#">API Reference</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Kebijakan Privasi</a></li>
+          <li><a href="#">Syarat & Ketentuan</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Nexora. Dibuat dengan ♥ di Indonesia.</span>
+      <div class="social-links">
+        <a href="#">Twitter</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Instagram</a>
+        <a href="#">GitHub</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Smooth anchor scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
+</body>
+</html>
